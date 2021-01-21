@@ -18,11 +18,17 @@ def get_longitude_of_city(data):
 def get_humidity_index(data):
     return str(data["main"]["humidity"])
 
+def request_weather_report(url):
+    return urllib.request.urlopen(url)
+
+def generate_json_for_parsing(response):
+    json_data = response.read()
+    return json.loads(json_data)
+
 def get_current_weather_in(city):
-    response = urllib.request.urlopen(OPENWEATHERMAP_URL + str("q=" + city + "&units=metric") + OPENWEATHERMAP_API_KEY)
+    response = request_weather_report(OPENWEATHERMAP_URL + str("q=" + city + "&units=metric") + OPENWEATHERMAP_API_KEY)
     if response.getcode() == 200:
-        json_data = response.read()
-        json_result = json.loads(json_data)
+        json_result = generate_json_for_parsing(response)
         print("City: " + json_result["name"])
         print("Longitude: " + get_longitude_of_city(json_result))
         print("Latitude: " + get_latitude_of_city(json_result))
