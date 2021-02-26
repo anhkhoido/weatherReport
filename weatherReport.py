@@ -5,7 +5,7 @@ import urllib.request
 from confidential import OPENWEATHERMAP_URL
 from confidential import OPENWEATHERMAP_API_KEY
 
-logging.basicConfig(level= logging.DEBUG, filename="weatherReport.log", format='%(asctime)s %(message)s', filemode='w')
+logging.basicConfig(level= logging.DEBUG, filename="weatherReport.log", format='%(asctime)s - %(levelname)s = %(message)s', filemode='w')
 
 LOGGER = logging.getLogger()
 
