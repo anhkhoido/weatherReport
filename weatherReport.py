@@ -9,20 +9,16 @@ logging.basicConfig(level= logging.DEBUG, filename="weatherReport.log", format='
 
 LOGGER = logging.getLogger()
 
-def get_wind_speed(data):
-    return str(data["wind"]["speed"])
-
-def get_temperature(data):
-    return str(data["main"]["temp"])
-
-def get_latitude_of_city(data):
-    return str(data["coord"]["lat"])
-
-def get_longitude_of_city(data):
-    return str(data["coord"]["lon"])
-
-def get_humidity_index(data):
-    return str(data["main"]["humidity"])
+class WeatherData:
+    def __init__(self, city, windSpeed, temperature, latitude, longitude, humidex):
+        LOGGER.debug("Creating one instance of class WeatherData with following attributes:")
+        LOGGER.debug(f"(City = {city}, Wind speed = {windSpeed}, Temperature = {temperature}, Latitude = {latitude}, Longitude = {longitude}, Humidex = {humidex})")
+        self.city = city
+        self.windSpeed = windSpeed
+        self.temperature = temperature
+        self.latitude = latitude
+        self.longitude = longitude
+        self.humidex = humidex
 
 def request_weather_report(url):
     return urllib.request.urlopen(url)
@@ -31,14 +27,14 @@ def generate_json_for_parsing(response):
     json_data = response.read()
     return json.loads(json_data)
 
-def display_weather_report(city, longitude, latitude, temperature, humidity_index, wind_speed):
-    LOGGER.debug(f"weatherReport.py : display_weather_report({city}, {longitude}, {latitude}, {temperature}, {humidity_index}, {wind_speed})")
-    print(f"City: {city}")
-    print(f"Longitude: {longitude}")
-    print(f"Latitude: {latitude}")
-    print(f"Temperature: {temperature} degrees Celcius.")
-    print(f"Humidex: {humidity_index}")
-    print(f"Wind speed: {wind_speed} km/h")
+def display_weather_report(weatherData):
+    LOGGER.debug(f"weatherReport.py : display_weather_report({weatherData})")
+    print(f"City: {weatherData.city}")
+    print(f"Longitude: {weatherData.longitude}")
+    print(f"Latitude: {weatherData.latitude}")
+    print(f"Temperature: {weatherData.temperature} degrees Celcius.")
+    print(f"Humidex: {weatherData.humidex}")
+    print(f"Wind speed: {weatherData.windSpeed} km/h")
 
 def get_current_weather_in(city):
     LOGGER.info(f"weatherReport.py : get_current_weather_in({city})")
@@ -48,12 +44,13 @@ def get_current_weather_in(city):
         LOGGER.debug("  HTTP request successful")
         json_result = generate_json_for_parsing(response)
         city = json_result["name"]
-        longitude = get_longitude_of_city(json_result)
-        latitude = get_latitude_of_city(json_result)
-        temperature = get_temperature(json_result)
-        humidity_index = get_humidity_index(json_result)
-        wind_speed = get_wind_speed(json_result)
-        display_weather_report(city, longitude, latitude, temperature, humidity_index, wind_speed)
+        longitude = json_result["coord"]["lon"]
+        latitude = json_result["coord"]["lat"]
+        temperature = json_result["main"]["temp"]
+        humidity_index = json_result["main"]["humidity"]
+        wind_speed = json_result["wind"]["speed"]
+        weatherData = WeatherData(city, wind_speed, temperature, latitude, longitude, humidity_index)
+        display_weather_report(weatherData)
     else:
         LOGGER.error("Problem with the server of openweathermap.org.")
 
