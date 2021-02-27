@@ -5,7 +5,7 @@
 [<img align="left" alt="Anh Khoi Do | Instagram" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg" />](https://twitter.com/anhkhoido)
 <br /><br />
 <p>I developed this project with Python and two of its standard libraries.<p>
-<p>This console application simulates the usage of a software about weather forecasts. The simulation occurs with HTTP requests to the website openweathermap.org. Moreover, the request's URL and the API key are defined in a file named confidential.py. The latter, as mentioned in the .gitignore file, is always excluded from any commits and pushes.</p>
+<p>This console application simulates the usage of a software about weather forecasts. The simulation occurs with HTTP requests to the website openweathermap.org. That request can return informations such as the city one wishes to analyze, its current weather and even wind speed. Moreover, the request's URL and the API key are defined in a file named confidential.py. The latter, as mentioned in the .gitignore file, is always excluded from any commit and push.</p>
 <br />
 
 ### Languages and Tools:
