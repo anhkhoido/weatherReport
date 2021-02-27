@@ -4,9 +4,13 @@ import sys
 import urllib.request
 from confidential import OPENWEATHERMAP_URL
 from confidential import OPENWEATHERMAP_API_KEY
+from documents.countries import COUNTRIES
 
 logging.basicConfig(level= logging.DEBUG, filename="weatherReport.log", format='%(asctime)s - %(levelname)s = %(message)s', filemode='w')
 LOGGER = logging.getLogger()
+
+COUNTRIES_NAME = list(COUNTRIES.keys())
+COUNTRIES_ALPHA_TWO_CODE = list(COUNTRIES.values())
 
 class WeatherData:
     def __init__(self, city, windSpeed, temperature, latitude, longitude, humidex):
