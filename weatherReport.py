@@ -25,6 +25,7 @@ def request_weather_report(url):
 
 def generate_json_for_parsing(response):
     json_data = response.read()
+    LOGGER.debug(json_data)
     return json.loads(json_data)
 
 def display_weather_report(weatherData):
