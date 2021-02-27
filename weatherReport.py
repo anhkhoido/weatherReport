@@ -4,10 +4,13 @@ import sys
 import urllib.request
 from confidential import OPENWEATHERMAP_URL
 from confidential import OPENWEATHERMAP_API_KEY
+from documents.countries import COUNTRIES
 
 logging.basicConfig(level= logging.DEBUG, filename="weatherReport.log", format='%(asctime)s - %(levelname)s = %(message)s', filemode='w')
-
 LOGGER = logging.getLogger()
+
+COUNTRIES_NAME = list(COUNTRIES.keys())
+COUNTRIES_ALPHA_TWO_CODE = list(COUNTRIES.values())
 
 class WeatherData:
     def __init__(self, city, windSpeed, temperature, latitude, longitude, humidex):
@@ -53,7 +56,7 @@ def get_current_weather_in(city):
         weatherData = WeatherData(city, wind_speed, temperature, latitude, longitude, humidity_index)
         display_weather_report(weatherData)
     else:
-        LOGGER.error("Problem with the server of openweathermap.org.")
+        LOGGER.error(f"Problem with the server of openweathermap.org. Response code has the value of {response.getcode()}.")
 
 def main():
     LOGGER.debug("WeatherReport.py : main()")
