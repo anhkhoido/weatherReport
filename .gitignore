@@ -2,3 +2,4 @@ confidential.py
 /__pycache__
 /__pycache__/*
 *.log
+/documents/__pycache__/*
