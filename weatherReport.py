@@ -6,7 +6,6 @@ from confidential import OPENWEATHERMAP_URL
 from confidential import OPENWEATHERMAP_API_KEY
 
 logging.basicConfig(level= logging.DEBUG, filename="weatherReport.log", format='%(asctime)s - %(levelname)s = %(message)s', filemode='w')
-
 LOGGER = logging.getLogger()
 
 class WeatherData:
@@ -53,7 +52,7 @@ def get_current_weather_in(city):
         weatherData = WeatherData(city, wind_speed, temperature, latitude, longitude, humidity_index)
         display_weather_report(weatherData)
     else:
-        LOGGER.error("Problem with the server of openweathermap.org.")
+        LOGGER.error(f"Problem with the server of openweathermap.org. Response code has the value of {response.getcode()}.")
 
 def main():
     LOGGER.debug("WeatherReport.py : main()")
