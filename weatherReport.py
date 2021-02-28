@@ -25,6 +25,17 @@ class WeatherData:
         self.country = country
         self.mainWeatherDescription = mainWeatherDescription
 
+def log_results_of(weatherData):
+    LOGGER.debug(f"weatherReport.py : log_results_of({weatherData})")
+    LOGGER.info(f"City: {weatherData.city}")
+    LOGGER.info(f"Country: {weatherData.country}")
+    LOGGER.info(f"Longitude: {weatherData.longitude}")
+    LOGGER.info(f"Latitude: {weatherData.latitude}")
+    LOGGER.info(f"Temperature: {weatherData.temperature} degrees Celcius.")
+    LOGGER.info(f"Humidex: {weatherData.humidex}")
+    LOGGER.info(f"Wind speed: {weatherData.windSpeed} km/h")
+    LOGGER.info(f"Description: {weatherData.mainWeatherDescription}")
+
 def request_weather_report(url):
     return urllib.request.urlopen(url)
 
@@ -35,6 +46,7 @@ def generate_json_for_parsing(response):
 
 def display_weather_report(weatherData):
     LOGGER.debug(f"weatherReport.py : display_weather_report({weatherData})")
+    log_results_of(weatherData)
     print(f"City: {weatherData.city}")
     print(f"Country: {weatherData.country}")
     print(f"Longitude: {weatherData.longitude}")
