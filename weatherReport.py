@@ -82,6 +82,8 @@ def main():
     if len(sys.argv) == 2:
         city = sys.argv[1]
         LOGGER.info(f"Analyzing city named {city}.")
+        if city.count(" ") != 0:
+            city = city.replace(" ", "%20")
         get_current_weather_in(city)
     else:
         LOGGER.error("Wrong number of arguments at the command line.")
