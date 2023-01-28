@@ -1,7 +1,8 @@
 COUNTRIES = {
     "Afghanistan": "AF",
     "Aland Islands": "AL",
-    "Albania": "Algeria",
+    "Albania": "AL",
+    "Algeria": "DZ",
     "American Samoa": "AS",
     "Andorra": "AD",
     "Angola": "AO",
